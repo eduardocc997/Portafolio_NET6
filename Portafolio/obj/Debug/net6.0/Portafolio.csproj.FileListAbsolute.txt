@@ -24,3 +24,7 @@ C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\obj\Debug\net6.0\Por
 C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\obj\Debug\net6.0\ref\Portafolio.dll
 C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\obj\Debug\net6.0\Portafolio.pdb
 C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\obj\Debug\net6.0\Portafolio.genruntimeconfig.cache
+C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\bin\Debug\net6.0\SendGrid.dll
+C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\bin\Debug\net6.0\StarkbankEcdsa.dll
+C:\Users\eduardo.camacho\source\repos\Portafolio\Portafolio\obj\Debug\net6.0\Portafolio.csproj.CopyComplete

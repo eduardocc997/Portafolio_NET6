@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portafolio.Models;
+using Portafolio.Services;
 using System.Diagnostics;
 
 namespace Portafolio.Controllers
@@ -7,45 +8,38 @@ namespace Portafolio.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IRepositorioProyectos repositorioProyectos;
+        private readonly IServicioEmail servicioEmail;
+        public HomeController(ILogger<HomeController> logger, IRepositorioProyectos repositorioProyectos, IServicioEmail servicioEmail)
         {
             _logger = logger;
+            this.repositorioProyectos = repositorioProyectos;
+            this.servicioEmail = servicioEmail;
         }
 
         public IActionResult Index()
         {
-            var proyectos = ObtenerProyectos().Take(3).ToList();
+
+            var proyectos = repositorioProyectos.ObtenerProyectos().Take(3).ToList();
             var model = new HomeIndexViewModel { Proyectos = proyectos };
             return View(model);
         }
-        private List<ProyectoViewModel> ObtenerProyectos()
+        public IActionResult Proyectos()
         {
-            return new List<ProyectoViewModel>() { 
-            new ProyectoViewModel
-            {
-                Titulo = "vTorke",
-                Descripcion = "CRM realizado en ASP.NET Framework",
-                Link = "http://ferreagro.ddns.net:2323/",
-                ImagenURL = "/img/pgvTorke.png"
-            },
-            new ProyectoViewModel
-            {
-                Titulo = "Sitio Web Motorke",
-                Descripcion = "Pagina web realizada con HTML",
-                Link = "http://www.motorke.com.mx",
-                ImagenURL = "/img/pgMotorke.png"
-            },
-            new ProyectoViewModel
-            {
-                Titulo = "E-Commerce realizado en PrestaShop",
-                Descripcion = "Pagina web administrada con PrestaShop",
-                Link = "http://www.torke.com.mx",
-                ImagenURL = "/img/pgTorke.png"
-            }
-            };
+            var proyectos = repositorioProyectos.ObtenerProyectos();
+            return View(proyectos);
         }
-        public IActionResult Privacy()
+        public IActionResult Contacto()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Contacto(ContactoViewModel contactoViewModel)
+        {
+            await servicioEmail.Enviar(contactoViewModel);
+            return RedirectToAction("Gracias");
+        }
+        public IActionResult Gracias()
         {
             return View();
         }
